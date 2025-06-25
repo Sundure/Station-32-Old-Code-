@@ -24,6 +24,7 @@ public class PauseManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         ExitDoor.OnPlayerWin += Disable;
+        SceneManager.OnSceneLoaded += Enable;
     }
 
     private void Update()
@@ -57,6 +58,11 @@ public class PauseManager : MonoBehaviour
         }
 
         enabled = false;
+    }
+
+    private void Enable()
+    {
+        enabled = true;
     }
 
     private void OnDestroy()

@@ -17,7 +17,7 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: f7f2b8dca2ee77048adac2ee37253f7a
-    name: Voulume
+    name: Volume
   m_AudioMixerGroupViews:
   - guids:
     - 37644d3d05e196a458b36e868ea4aa89

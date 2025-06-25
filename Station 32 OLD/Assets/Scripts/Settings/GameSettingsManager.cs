@@ -9,6 +9,8 @@ public class GameSettingsManager : MonoBehaviour
 
     public static GameSettingsManager Instance { get; private set; }
 
+    [SerializeField] private IAuthorizeOnAwake[] _authorizeOnAwakeObjects;
+
     private void Awake()
     {
         if (Instance == null)
@@ -19,6 +21,14 @@ public class GameSettingsManager : MonoBehaviour
         else Destroy(gameObject);
 
         GameSettings = LoadSettings();
+
+        if (_authorizeOnAwakeObjects != null)
+        {
+            for (int i = 0; i < _authorizeOnAwakeObjects.Length; i++)
+            {
+                _authorizeOnAwakeObjects[i].Authorize();
+            }
+        }
     }
 
     public void SaveSettings(GameSettings settings)

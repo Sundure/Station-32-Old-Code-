@@ -9,6 +9,8 @@ public class SceneManager : MonoBehaviour
 
     public readonly static List<Scene> Scenes = new();
 
+    public static event Action OnSceneLoaded;
+
     public static List<Scene> ScenesWithFixedTimeScale { get; private set; } = new();
 
     private const string MAIN_MENU_SCENE = "MainMenu";
@@ -26,7 +28,7 @@ public class SceneManager : MonoBehaviour
             return;
         }
 
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += SceneLoaded;
 
         DontDestroyOnLoad(gameObject);
 
@@ -83,7 +85,7 @@ public class SceneManager : MonoBehaviour
         }
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode _)
+    private void SceneLoaded(Scene scene, LoadSceneMode _)
     {
         if (scene.name == MAIN_MENU_SCENE)
         {
@@ -92,6 +94,8 @@ public class SceneManager : MonoBehaviour
         }
 
         Debug.Log($"Loaded Scene {scene.name}");
+
+        OnSceneLoaded?.Invoke();
     }
 
     public static void LoadScene(SceneList scene)
@@ -103,6 +107,6 @@ public class SceneManager : MonoBehaviour
     {
         Debug.Log($"{this} Destroyed");
 
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded -= SceneLoaded;
     }
 }

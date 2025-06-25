@@ -30,11 +30,14 @@ public class AudioSettings : MonoBehaviour
         {
             case (AudioMixerManager.AudioMixerType.Main):
                 AudioMixerManager.ChangeVolume(GameSettingsManager.Instance.GameSettings.MainVolume, _audioMixerType);
+                _slider.value = GameSettingsManager.Instance.GameSettings.MainVolume;
                 break;
             case (AudioMixerManager.AudioMixerType.Sound):
                 AudioMixerManager.ChangeVolume(GameSettingsManager.Instance.GameSettings.SoundVolume, _audioMixerType);
+                _slider.value = GameSettingsManager.Instance.GameSettings.SoundVolume;
                 break;
         }
+
     }
 
     private void OnSliderValueChanged(float value)
@@ -53,8 +56,8 @@ public class AudioSettings : MonoBehaviour
                 break;
         }
     }
-    
-    public void OnPointerUp(BaseEventData _)
+
+    public void OnPointerUp(BaseEventData _) // Save Settings On Pointer Up
     {
         GameSettingsManager.Instance.SaveSettings(GameSettingsManager.Instance.GameSettings);
     }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Rendering;
 
 public class AudioMixerManager : MonoBehaviour
 {
@@ -54,26 +55,17 @@ public class AudioMixerManager : MonoBehaviour
             volumeDB = MIN_VOLUME;
         }
         else
-            volumeDB = Mathf.Log10(volume);
+            volumeDB = Mathf.Log10(volume) * 20; // Decibel Formula
 
         switch (mixerType)
         {
             case AudioMixerType.Main:
-                Instance._mainAudioMixer.SetFloat("Volume", volumeDB * 20);
-
-                volume = GameSettingsManager.Instance.GameSettings.MainVolume;
-
-                if (volume < 0.0001f) //Log10 Inf Protection
-                {
-                    volumeDB = MIN_VOLUME;
-                }
-                else
-                    volumeDB = Mathf.Log10(volume);
+                Instance._mainAudioMixer.SetFloat("Volume", volumeDB);
 
                 Instance._mainIgnoringPauseAudioMixer.SetFloat("Volume", GameSettingsManager.Instance.GameSettings.MainVolume * 20);
                 break;
             case AudioMixerType.Sound:
-                Instance._soundAudioMixer.SetFloat("Volume", volumeDB * 20);
+                Instance._soundAudioMixer.SetFloat("Volume", volumeDB);
                 break;
         }
     }
