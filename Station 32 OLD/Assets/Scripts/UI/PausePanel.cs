@@ -4,12 +4,45 @@ public class PausePanel : MonoBehaviour
 {
     [SerializeField] private GameObject _pausePanel;
 
+    public DirectoryManager DirectoryManager { get; private set; }
+
+    [SerializeField] private Directory _defaultDirectory;
+
+    public static PausePanel Instance { get; private set; }
+
     private void Awake()
     {
-        PauseManager.OnPauseChange += SwitchPausePanel;
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
+        DirectoryManager = new();
     }
 
-    private void SwitchPausePanel(bool enabled)
+    private void LateUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+
+            if (PauseManager.Pause == true)
+            {
+                if (_pausePanel.activeSelf)
+                {
+                    DirectoryManager.UndoDirectory();
+                    return;
+                }
+
+                SwitchPausePanel(true);
+                PauseManager.Instance.enabled = false;
+                return;
+            }
+        }
+    }
+
+    public void SwitchPausePanel(bool enabled)
     {
         if (enabled == _pausePanel.activeSelf)
             return;
@@ -20,6 +53,7 @@ public class PausePanel : MonoBehaviour
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            DirectoryManager.CurrentDirectory = _defaultDirectory; // Set Default Directory When Pause Panel Enabled
         }
         else
         {
@@ -28,8 +62,14 @@ public class PausePanel : MonoBehaviour
         }
     }
 
+    public void UndoDirectory() // This Function Are Made For Buttons OnClick Events
+    {
+        DirectoryManager.UndoDirectory();
+    }
+
     private void OnDestroy()
     {
-        PauseManager.OnPauseChange -= SwitchPausePanel;
+        if (Instance == this)
+            Instance = null;
     }
 }

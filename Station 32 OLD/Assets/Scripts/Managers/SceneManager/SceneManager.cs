@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneManager : MonoBehaviour
 {
-    private static SceneManager _instance;
+    public static SceneManager Instance;
 
     public readonly static List<Scene> Scenes = new();
 
     public static event Action OnSceneLoaded;
+    public static event Action<SceneList> OnSceneFromListLoaded;
 
     public static List<Scene> ScenesWithFixedTimeScale { get; private set; } = new();
 
@@ -17,9 +18,9 @@ public class SceneManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_instance == null)
+        if (Instance == null)
         {
-            _instance = this;
+            Instance = this;
         }
         else
         {
@@ -46,8 +47,6 @@ public class SceneManager : MonoBehaviour
         if (buildScenesCount != listScenesCount)
         {
             Debug.LogError($"\"SceneList\" Scenes Count ({listScenesCount}) Does Not Equal \"Build Profile\" Scenes Count ({buildScenesCount}) ");
-
-
         }
 
         for (int i = 0; i < buildScenesCount; i++)
@@ -96,6 +95,11 @@ public class SceneManager : MonoBehaviour
         Debug.Log($"Loaded Scene {scene.name}");
 
         OnSceneLoaded?.Invoke();
+
+        if (Enum.TryParse(scene.name, out SceneList sceneList))
+        {
+            OnSceneFromListLoaded?.Invoke(sceneList);
+        }
     }
 
     public static void LoadScene(SceneList scene)

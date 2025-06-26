@@ -7,13 +7,13 @@ public class PauseManager : MonoBehaviour
 
     public static event Action<bool> OnPauseChange;
 
-    private static PauseManager _instance;
+    public static PauseManager Instance;
 
     private void Awake()
     {
-        if (_instance == null)
+        if (Instance == null)
         {
-            _instance = this;
+            Instance = this;
         }
         else
         {
@@ -24,16 +24,15 @@ public class PauseManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         ExitDoor.OnPlayerWin += Disable;
-        SceneManager.OnSceneLoaded += Enable;
+        SceneManager.OnSceneLoaded += OnSceneLoad;
+        SceneManager.OnSceneFromListLoaded += OnSceneLoad;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            bool pause = !Pause;
-
-            ChangePause(pause);
+            ChangePause(!Pause);
         }
     }
 
@@ -50,23 +49,36 @@ public class PauseManager : MonoBehaviour
     {
         if (Pause)
         {
-            Pause = false;
-
-            OnPauseChange?.Invoke(Pause);
-
-            Time.timeScale = 1;
+            ChangePause(false);
         }
 
         enabled = false;
     }
 
-    private void Enable()
+    public void ChangePauseManagerStates(bool enabled, bool pause)
     {
-        enabled = true;
+        this.enabled = enabled;
+        ChangePause(pause);
+    }
+
+    private void OnSceneLoad()
+    {
+        ChangePauseManagerStates(true, false);
+    }
+
+    private void OnSceneLoad(SceneList scene)
+    {
+        if (scene == SceneList.MainMenu)
+        {
+            ChangePauseManagerStates(false, false);
+            return;
+        }
     }
 
     private void OnDestroy()
     {
         ExitDoor.OnPlayerWin -= Disable;
+        SceneManager.OnSceneLoaded -= OnSceneLoad;
+        SceneManager.OnSceneFromListLoaded -= OnSceneLoad;
     }
 }
