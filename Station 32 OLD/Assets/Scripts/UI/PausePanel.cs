@@ -26,7 +26,6 @@ public class PausePanel : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-
             if (PauseManager.Pause == true)
             {
                 if (_pausePanel.activeSelf)

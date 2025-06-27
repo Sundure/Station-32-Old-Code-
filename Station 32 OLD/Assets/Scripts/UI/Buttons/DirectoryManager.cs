@@ -1,6 +1,4 @@
 
-using UnityEngine;
-
 public class DirectoryManager
 {
     public Directory CurrentDirectory;

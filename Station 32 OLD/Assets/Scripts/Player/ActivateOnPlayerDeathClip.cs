@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerDeathMovie : MonoBehaviour
+public class ActivateOnPlayerDeathClip : MonoBehaviour
 {
     [SerializeField] private VideoController _videoController;
 

@@ -33,7 +33,7 @@ public class MonsterAI : MonoBehaviour
 
     [SerializeField] private ExitDoor _exitDoorScript;
 
-    [SerializeField] private PlayerDeathMovie _playerDeath;
+    [SerializeField] private ActivateOnPlayerDeathClip _playerDeath;
 
     [SerializeField] private Transform _pastPlayerPosition;
     private Vector3 _magnitudaToPastPlayerPosition;
