@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class StartVideoClip : MonoBehaviour
 {
-    [SerializeField] private VideoClipDestroyer _videoClipDestroyer;
     [SerializeField] private VideoController _videoController;
 
     private void Start()
     {
-        _videoClipDestroyer.OnDestroyed += OnVideoClipDestroyed;
+        _videoController.OnDestroyed += OnVideoClipDestroyed;
 
         PauseManager.Instance.ChangePauseManagerStates(false,true);
     }
@@ -20,6 +19,6 @@ public class StartVideoClip : MonoBehaviour
 
     private void OnDestroy()
     {
-        _videoClipDestroyer.OnDestroyed -= OnVideoClipDestroyed;
+        _videoController.OnDestroyed -= OnVideoClipDestroyed;
     }
 }

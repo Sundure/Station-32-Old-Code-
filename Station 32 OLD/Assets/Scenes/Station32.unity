@@ -3534,12 +3534,12 @@ GameObject:
   - component: {fileID: 87987868}
   - component: {fileID: 87987869}
   m_Layer: 5
-  m_Name: Death Movie
+  m_Name: Death Video Clip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &87987864
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3557,7 +3557,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -0.43701172}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &87987865
 MonoBehaviour:
@@ -3573,7 +3573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3609,8 +3609,10 @@ MonoBehaviour:
   _rendererImage: {fileID: 87987865}
   _videoClip: {fileID: 32900000, guid: e6d7d43063c455d458c651bbeb63a133, type: 3}
   _videoPlayer: {fileID: 1192426509}
-  _playOnCreate: 1
-  _prepareOnCreate: 1
+  _playOnCreate: 0
+  _prepareOnCreate: 0
+  _destroyOnClipEnded: 1
+  _canSkip: 1
 --- !u!114 &87987869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3618,7 +3620,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 87987863}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb11a574370d1c642873c0e6d05f0fd6, type: 3}
   m_Name: 
@@ -45204,11 +45206,10 @@ GameObject:
   - component: {fileID: 1194925600}
   - component: {fileID: 1194925602}
   - component: {fileID: 1194925601}
-  - component: {fileID: 1194925603}
   - component: {fileID: 1194925605}
   - component: {fileID: 1194925604}
   m_Layer: 5
-  m_Name: Start Movie
+  m_Name: Start Death Video Clip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45247,7 +45248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -45268,19 +45269,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194925599}
   m_CullTransparentMesh: 1
---- !u!114 &1194925603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194925599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5156656fe3dd0740b1ae3bfb6a4b9c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _videoController: {fileID: 1194925604}
 --- !u!114 &1194925604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45298,6 +45286,8 @@ MonoBehaviour:
   _videoPlayer: {fileID: 1192426509}
   _playOnCreate: 1
   _prepareOnCreate: 1
+  _destroyOnClipEnded: 1
+  _canSkip: 1
 --- !u!114 &1194925605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45310,7 +45300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595d928bf19c0ea45922eacac1320810, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _videoClipDestroyer: {fileID: 1194925603}
   _videoController: {fileID: 1194925604}
 --- !u!1001 &1195783230
 PrefabInstance:
@@ -52609,6 +52598,46 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 580fb44134f648545bb250688d9a9e10, type: 3}
+--- !u!21 &1384983147
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Custom/ImageBlendEffect
+  m_Shader: {fileID: 4800000, guid: db8aebe950ae3794aae5ed890f38549b, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BlendTex:
+        m_Texture: {fileID: 2800000, guid: 210743b88c99bcf45b28c3a4a4a3e178, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 065247d136abaa042a330ab6a7b030fc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats: []
+    m_Colors: []
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!1001 &1387891997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56312,7 +56341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1489843156
 RectTransform:
   m_ObjectHideFlags: 0
@@ -63996,6 +64025,7 @@ GameObject:
   - component: {fileID: 1684392499}
   - component: {fileID: 1684392500}
   - component: {fileID: 1684392501}
+  - component: {fileID: 1684392502}
   m_Layer: 0
   m_Name: Scene Controler
   m_TagString: Untagged
@@ -64045,6 +64075,19 @@ MonoBehaviour:
   _mainAudioMixer: {fileID: 24100000, guid: 579a823ade263b94195a2cfc0022eba0, type: 2}
   _mainIgnoringPauseAudioMixer: {fileID: 24100000, guid: dd147de2d71b8af44854f3434caa8a2f, type: 2}
   _soundAudioMixer: {fileID: 24100000, guid: d14f79d503640924b85d9d3bb8c10284, type: 2}
+--- !u!114 &1684392502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684392497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2655c77cceaf68a4bbeeac19d6cac16e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loadingPanelPrefab: {fileID: 8757225726326014122, guid: 50135dca75379744eae47820a956dc9b, type: 3}
 --- !u!1001 &1685827079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74534,7 +74577,7 @@ MonoBehaviour:
   Frost: {fileID: 2800000, guid: 210743b88c99bcf45b28c3a4a4a3e178, type: 3}
   FrostNormals: {fileID: 2800000, guid: 065247d136abaa042a330ab6a7b030fc, type: 3}
   FrostShader: {fileID: 4800000, guid: db8aebe950ae3794aae5ed890f38549b, type: 3}
-  material: {fileID: 2029392233}
+  material: {fileID: 1384983147}
 --- !u!114 &1821509788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81615,46 +81658,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 430394, guid: 3bab19842fc2b8e44837b5c42192679d, type: 3}
   m_PrefabInstance: {fileID: 2028992078}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &2029392233
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Custom/ImageBlendEffect
-  m_Shader: {fileID: 4800000, guid: db8aebe950ae3794aae5ed890f38549b, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BlendTex:
-        m_Texture: {fileID: 2800000, guid: 210743b88c99bcf45b28c3a4a4a3e178, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 065247d136abaa042a330ab6a7b030fc, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats: []
-    m_Colors: []
-  m_BuildTextureStacks: []
-  m_AllowLocking: 1
 --- !u!1001 &2029700262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87100,7 +87103,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3bad06b7c7052144ebe4d46c3b2d7636, type: 3}
   _playerMovet: {fileID: 1010002494}
   _exitDoorScript: {fileID: 0}
-  _playerDeath: {fileID: 0}
   _pastPlayerPosition: {fileID: 0}
   _metersToPastTargetPosition: 0
   _search: 0

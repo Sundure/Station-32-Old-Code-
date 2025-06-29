@@ -10,6 +10,7 @@ public class SceneManager : MonoBehaviour
     public readonly static List<Scene> Scenes = new();
 
     public static event Action OnSceneLoaded;
+    public static event Action<AsyncOperation> OnSceneStartLoading;
     public static event Action<SceneList> OnSceneFromListLoaded;
 
     public static List<Scene> ScenesWithFixedTimeScale { get; private set; } = new();
@@ -104,7 +105,7 @@ public class SceneManager : MonoBehaviour
 
     public static void LoadScene(SceneList scene)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(scene.ToString());
+        OnSceneStartLoading?.Invoke(UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(scene.ToString()));
     }
 
     private void OnDestroy()

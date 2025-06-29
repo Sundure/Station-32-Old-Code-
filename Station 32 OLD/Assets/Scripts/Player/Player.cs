@@ -8,9 +8,9 @@ public class Player : MonoBehaviour
 
     [Header("Player Stats")]
 
-    private bool _playerDeath;
+    public bool Alive { get; private set; } = true;
 
-    public float Health;
+public float Health;
     public float MaxHealth = 200;
 
     [HideInInspector] public float Temperature;
@@ -71,9 +71,9 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Die()
     {
-        if (_playerDeath) return;
+        if (Alive == false) return;
 
-        _playerDeath = true;
+        Alive = false;
         PlayerDeathCallback.ReturnDeathCallback += OnDeathCallback;
 
         OnPlayerDeath?.Invoke();
