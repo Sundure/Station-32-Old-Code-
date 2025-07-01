@@ -4,31 +4,25 @@ public class CameraController : MonoBehaviour
     public float SensX;
     public float SensY;
 
-    [SerializeField] private Transform orientation;
+    private float _xRotaion;
+    private float _yRotaion;
 
-    private float xRotaion;
-    private float yRotaion;
+    [SerializeField] private Transform _orientation;
 
-    [SerializeField] private Transform cameraPosition;
-
-    private void Awake()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
+    [SerializeField] private Transform _cameraPosition;
 
     private void Update()
     {
-        transform.position = cameraPosition.position;
+        transform.position = _cameraPosition.position;
 
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * SensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * SensY;
 
-        yRotaion += mouseX;
-        xRotaion -= mouseY;
-        xRotaion = Mathf.Clamp(xRotaion, -90f, 90f);
+        _yRotaion += mouseX;
+        _xRotaion -= mouseY;
+        _xRotaion = Mathf.Clamp(_xRotaion, -90f, 90f);
 
-        transform.rotation = Quaternion.Euler(xRotaion, yRotaion, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotaion, 0);
+        transform.rotation = Quaternion.Euler(_xRotaion, _yRotaion, 0);
+        _orientation.rotation = Quaternion.Euler(0, _yRotaion, 0);
     }
 }

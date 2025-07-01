@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class AudioScreamerManager : MonoBehaviour
+public class EnemyAudioScreamerManager : MonoBehaviour
 {
     [Header("Transform")]
     [SerializeField] private Transform _enemy;

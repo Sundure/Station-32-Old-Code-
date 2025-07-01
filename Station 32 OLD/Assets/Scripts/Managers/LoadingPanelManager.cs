@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoadingPanel : MonoBehaviour
+public class LoadingPanelManager : MonoBehaviour
 {
     private Slider _slider;
 
     [SerializeField] private GameObject _loadingPanelPrefab;
 
-    private static LoadingPanel _instance;
+    private static LoadingPanelManager _instance;
 
     private AsyncOperation _asyncOperation;
 

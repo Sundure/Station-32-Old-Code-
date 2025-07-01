@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Storm : MonoBehaviour
+public class StormAudioPlayer : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
 
