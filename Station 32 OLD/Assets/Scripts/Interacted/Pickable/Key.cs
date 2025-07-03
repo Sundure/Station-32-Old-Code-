@@ -6,7 +6,7 @@ public class Key : Interacted
 
     protected override void Use()
     {
-      //  Player.Instance.LockerKey = true;
+        Player.Instance.Key = true;
 
         PlayerAudioManager.PlayOneShoot(_pickUpAudioClip);
 

@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     public bool Alive { get; private set; } = true;
 
-public float Health;
+    public float Health;
     public float MaxHealth = 200;
 
     [HideInInspector] public float Temperature;
@@ -20,6 +20,7 @@ public float Health;
     [Header("Inventory")] //TODO Make Full Inventory System
 
     public bool Screwdriver;
+    public bool Key;
 
     public int FuelCount;
     public int FlareCount;

@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _holdButtonToUse: 0
-  _animator: {fileID: 0}
+  _animator: {fileID: 5591758241905927508}
   _audioSource: {fileID: 4851108618646455201}
   _doorOpenAudioClip: {fileID: 8300000, guid: 9559b7764ee392440b3b9ed5eb9071f2, type: 3}
   _doorCloseAudioClip: {fileID: 8300000, guid: 9559b7764ee392440b3b9ed5eb9071f2, type: 3}

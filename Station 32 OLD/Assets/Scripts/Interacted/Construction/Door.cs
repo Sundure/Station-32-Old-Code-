@@ -3,18 +3,23 @@ using UnityEngine;
 
 public class Door : Interacted
 {
+    [Header("Components")]
     [SerializeField] private Animator _animator;
 
     [SerializeField] private AudioSource _audioSource;
 
+    [Header("Default Door Audio")]
     [SerializeField] private AudioClip _doorOpenAudioClip;
     [SerializeField] private AudioClip _doorCloseAudioClip;
 
-    [SerializeField] private DoorState _doorState = DoorState.Close;
+    [Header("Door Key Audio")]
+    [SerializeField] private AudioClip _doorKeyOpenAudioClip;
+    [SerializeField] private AudioClip _doorKeyClosedAudioCLip;
 
-    [SerializeField] private byte _doorKeyCode;
+    [Header("Other")]
+    [SerializeField] private DoorState _doorState = DoorState.Closed;
 
-    private bool _canUse = true;
+    [SerializeField] private bool _canUse = true;
 
     //Animations Names
     private const string CLOSE_DOOR = "Close";
@@ -23,7 +28,7 @@ public class Door : Interacted
     private enum DoorState
     {
         Open,
-        Close,
+        Closed,
         Locked
     }
 
@@ -32,7 +37,7 @@ public class Door : Interacted
         switch (_doorState)
         {
             case DoorState.Open:
-                _doorState = DoorState.Close;
+                _doorState = DoorState.Closed;
 
                 _audioSource.clip = _doorCloseAudioClip;
                 _audioSource.Play();
@@ -41,7 +46,7 @@ public class Door : Interacted
 
                 StartCoroutine(WaitDelay(_animator.GetCurrentAnimatorStateInfo(0).length));
                 break;
-            case DoorState.Close:
+            case DoorState.Closed:
                 _doorState = DoorState.Open;
 
                 _audioSource.clip = _doorOpenAudioClip;
@@ -52,10 +57,18 @@ public class Door : Interacted
                 StartCoroutine(WaitDelay(_animator.GetCurrentAnimatorStateInfo(0).length));
                 break;
             case DoorState.Locked:
+                if (Player.Instance.Key == true)
+                {
+                    _audioSource.clip = _doorKeyOpenAudioClip;
+                    _audioSource.Play();
 
-                Debug.Log("Door is locked");
-
-                _doorState = DoorState.Open;
+                    _doorState = DoorState.Closed;
+                }
+                else
+                {
+                    _audioSource.clip = _doorKeyClosedAudioCLip;
+                    _audioSource.Play();
+                }
                 break;
         }
     }
