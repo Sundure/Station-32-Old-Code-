@@ -1,28 +1,20 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class ShoutAndWalkMechanic : MonoBehaviour
+public class EnemyBehavior : MonoBehaviour
 {
     [SerializeField] private Animator _shoutAnim;
     [SerializeField] private MonsterAI _monsterAI;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _audioStomp;
     [SerializeField] private AudioClip[] _audioShoutArray = new AudioClip[2];
-
-    private float _volume;
-    private float _maxDistance = 25;
-    private float _maxVolume = 1;
-
-    private void Update()
-    {
-        _volume = Mathf.Clamp01(1 - _monsterAI.MetersToPlayer / _maxDistance) * _maxVolume;
-        _audioSource.volume = _volume;
-    }
+    
+    private void Awake() => _audioSource.clip = _audioStomp;
+    
     public void StompAudio()
     {
         if (_monsterAI.CanShout)
         {
-            _audioSource.clip = _audioStomp;
             _audioSource.Play();
         }
     }

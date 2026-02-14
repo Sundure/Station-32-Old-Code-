@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MonsterAI : MonoBehaviour                                                 
+public class MonsterAI : MonoBehaviour   //Shell With Instruments                                             
 {                                                                                      
-    [SerializeField] private Transform _target;                                        
-    public GameObject _player;                                                         
-    [SerializeField] private Transform[] _patrolingPointArray = new Transform[8];      
+    [SerializeField] private Transform _target;
+    public GameObject _player;
+    [SerializeField] private Transform[] _patrolingPointArray = new Transform[8];
     private NavMeshAgent _agent;                                                       
     private Vector3 _magnituda;                                                        
     private Vector3 _magnitudaToTarget;                                                
@@ -20,7 +20,7 @@ public class MonsterAI : MonoBehaviour
                                                                                        
     public bool _isSee;                                                                
                                                                                        
-    [SerializeField] private ShoutAndWalkMechanic _shoutAndWalkMechanic;
+    [SerializeField] private EnemyBehavior _enemyBehavior;
     private float _shoutTime;
     public bool CanShout;
     [SerializeField] private CameraController _cameraScript;
@@ -29,7 +29,7 @@ public class MonsterAI : MonoBehaviour
     [SerializeField] private AudioClip[] _audioArray = new AudioClip[2];
     private bool _canPlayAudio;
 
-    [SerializeField] private Playermovment _playerMovet;
+    [SerializeField] private PlayerController _playerMovet;
 
     [SerializeField] private ExitDoor _exitDoorScript;
 
@@ -94,7 +94,7 @@ public class MonsterAI : MonoBehaviour
             _patroling = false;
             if (CanShout == true)
             {
-                _shoutAndWalkMechanic.Shout();
+                _enemyBehavior.Shout();
                 CanShout = false;
             }
             _shoutTime += Time.deltaTime;
@@ -107,7 +107,7 @@ public class MonsterAI : MonoBehaviour
 
             if (_shoutTime > 2.18f)
             {
-                _shoutAndWalkMechanic.StompAudio();
+                _enemyBehavior.StompAudio();
 
                 if (_search == true)
                 {
@@ -154,7 +154,7 @@ public class MonsterAI : MonoBehaviour
                 }
             }
         }
-        else if (MetersToPlayer <= 5f && _playerMovet.Run == true)
+        else if (MetersToPlayer <= 5f /*&& _playerMovet.Run == true */)
         {
             _isSee = true;
             _agent.destination = _target.position;
@@ -164,7 +164,7 @@ public class MonsterAI : MonoBehaviour
             _isSee = false;
             Patroling();
         }
-        if (MetersToPlayer <= 5f && _playerMovet._crouch == false)
+        if (MetersToPlayer <= 5f /*&& _playerMovet._crouch == false */)
         {
             _isSee = true;
         }

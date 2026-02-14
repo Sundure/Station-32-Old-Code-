@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class CameraController : MonoBehaviour
 {
     public float SensX;
@@ -7,7 +8,7 @@ public class CameraController : MonoBehaviour
     private float _xRotaion;
     private float _yRotaion;
 
-    [SerializeField] private Transform _orientation;
+    [SerializeField] private Transform _playerBody;
 
     [SerializeField] private Transform _cameraPosition;
 
@@ -23,6 +24,6 @@ public class CameraController : MonoBehaviour
         _xRotaion = Mathf.Clamp(_xRotaion, -90f, 90f);
 
         transform.rotation = Quaternion.Euler(_xRotaion, _yRotaion, 0);
-        _orientation.rotation = Quaternion.Euler(0, _yRotaion, 0);
+        _playerBody.rotation = Quaternion.Euler(0, _yRotaion, 0);
     }
 }

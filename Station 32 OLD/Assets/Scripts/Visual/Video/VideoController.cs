@@ -19,22 +19,28 @@ public class VideoController : MonoBehaviour
     [SerializeField] private bool _prepareOnCreate;
     [SerializeField] private bool _destroyOnClipEnded;
     [SerializeField] private bool _canSkip;
+    [SerializeField] private bool _renderVideoWhenPlaying;
 
     private RenderTexture _rendererTexture;
 
     public event Action OnDestroyed;
     public event Action OnSkiped;
 
-    private float _skipMinimalTime = 0.5f;
+    private readonly float _skipMinimalTime = 0.5f;
 
     private bool _canSkipDelayed;
 
     private void Awake()
     {
-        _rendererTexture = new(1920, 1080, 0);
-        _rendererTexture.name = _videoClip.name + " Render Texture";
+        _rendererTexture = new(1920, 1080, 0)
+        {
+            name = _videoClip.name + " Render Texture"
+        };
 
         _rendererImage.texture = _rendererTexture;
+
+        if (_renderVideoWhenPlaying)
+            _rendererImage.enabled = false;
 
         enabled = false;
 
@@ -92,6 +98,7 @@ public class VideoController : MonoBehaviour
     {
         _videoPlayer.Play();
 
+        _rendererImage.enabled = true;
         enabled = true;
 
         if (_canSkip)
@@ -103,6 +110,9 @@ public class VideoController : MonoBehaviour
 
     public void Pause()
     {
+        if (_renderVideoWhenPlaying)
+            _rendererImage.enabled = false;
+        
         _videoPlayer.Pause();
 
         enabled = false;
@@ -110,6 +120,9 @@ public class VideoController : MonoBehaviour
 
     public void Stop()
     {
+        if (_renderVideoWhenPlaying)
+            _rendererImage.enabled = false;
+        
         _videoPlayer.Stop();
 
         enabled = false;
